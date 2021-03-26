@@ -47,66 +47,37 @@ addOperationListener(divide_btn,"/",divide,false)
 window.addEventListener("keydown", checkkeypress, false)
 
 function checkkeypress(key){
-    if(key.keyCode== "48"){
-        display(0)
-    }
-    if(key.keyCode== "49"){
-        display(1)
-    }
-    if(key.keyCode== "50"){
-        display(2)
-    }
-    if(key.keyCode== "51"){
-        display(3)
-    }
-    if(key.keyCode== "52"){
-        display(4)
-    }
-    if(key.keyCode== "53"){
-        display(5)
-    }
-    if(key.keyCode== "54"){
-        display(6)
-    }
-    if(key.keyCode== "55"){
-        display(7)
-    }
-    if(key.keyCode== "56"){
-        display(8)
-    }
-    if(key.keyCode== "57"){
-        display(9)
-    }
-    if(key.keyCode== "8"){
-        destroy()
-    }
-    if(key.keyCode== "13"){
-        equals()
-    }
-    if(key.keyCode== "107"){
-        addOperationListener(add_btn,"+",add, true)
-    }
-    if(key.keyCode== "171"){
-        addOperationListener(add_btn,"+",add, true)
-    }
-    if(key.keyCode== "109"){
-        addOperationListener(subtract_btn,"-",subtract,true)
-    }
-    if(key.keyCode== "173"){
-        addOperationListener(subtract_btn,"-",subtract,true)
-    }
-    if(key.keyCode== "106"){
-        addOperationListener(multiply_btn,"*",multiply,true)
-    }
-    // if(key.keyCode== "16"+"171"){
-    //     addOperationListener(multiply_btn,"*",multiply,true)
-    // }
-    if(key.keyCode== "111"){
+    if (key.key == "/") {
         addOperationListener(divide_btn,"/",divide,true)
+        return
     }
-    // if(key.keyCode== "16"+"55"){
-    //     addOperationListener(divide_btn,"/",divide,true)
-    // }
+    if (key.key == "*"){
+        addOperationListener(multiply_btn,"*",multiply,true)
+        return
+    }
+    if (key.key == "+"){
+        addOperationListener(add_btn,"+",add, true)
+        return
+    }
+    if (key.key == "-"){
+        addOperationListener(subtract_btn,"-",subtract,true)
+        return
+    }
+    // Numeric keys '0' to '9'
+    if (key.keyCode >= 48 && key.keyCode <= 57){
+      display(key.keyCode - 48)
+      return;
+    }
+    switch (key.keyCode) {
+      case 8: // Backspace
+        destroy()
+        break
+      case 13: // Enter
+        sendAction()
+        break
+      default:
+        break
+    }
 }
 let currentOperator = null;
 let firstNumber = null;
@@ -114,7 +85,7 @@ let lastOperator = null;
 
 delete_btn.addEventListener('click', destroy) 
 
-equals_btn.addEventListener('click',equals)
+equals_btn.addEventListener('click',sendAction)
 
 function addOperationListener(button, operation, func, hotkey){         //gets the Operation the user chose 
     if(hotkey == true){
@@ -145,8 +116,8 @@ function addOperationListener(button, operation, func, hotkey){         //gets t
     })
 }
 
-function equals(){
-    if(result_tab.innerText == ""){     //equals wont work if there is no second number typed
+function sendAction(){
+    if(result_tab.innerText == ""){     //sendAction wont work if there is no second number typed
         return 
     }
     if (currentOperator !== null){      //if first, second number and operation already typed calculate everything
