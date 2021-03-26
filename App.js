@@ -48,25 +48,25 @@ window.addEventListener("keydown", checkkeypress, false)
 
 function checkkeypress(key){
     if (key.key == "/") {
-        addOperationListener(divide_btn,"/",divide,true)
+        addOperationListener(divide_btn, "/", divide, true)
         return
     }
     if (key.key == "*"){
-        addOperationListener(multiply_btn,"*",multiply,true)
+        addOperationListener(multiply_btn, "*", multiply, true)
         return
     }
     if (key.key == "+"){
-        addOperationListener(add_btn,"+",add, true)
+        addOperationListener(add_btn, "+", add, true)
         return
     }
     if (key.key == "-"){
-        addOperationListener(subtract_btn,"-",subtract,true)
+        addOperationListener(subtract_btn, "-", subtract, true)
         return
     }
     // Numeric keys '0' to '9'
     if (key.keyCode >= 48 && key.keyCode <= 57){
       display(key.keyCode - 48)
-      return;
+      return
     }
     switch (key.keyCode) {
       case 8: // Backspace
